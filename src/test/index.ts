@@ -15,49 +15,42 @@ import {
   TimeStampToken,
   TSTInfo,
   TSTInfoVersion,
-} from "../tsr/inex";
+} from "@peculiar/asn1-tsp";
 
 context("TSP", () => {
   it("parse TSTInfo", async () => {
     const file = await fs.readFile(
-      path.join(__dirname, "../resoures/response1.tsr")
+      path.join(__dirname, "../resoures/response2.tsr")
     );
-    // const fileHex = Buffer.from(file, "hex");
-    const hex =
-      "30820113060B2A864886F70D0109100104A08201020481FF3081FC02010106032901013021300906052B0E03021A0500041495811474539B0D71C20A2107FBACCDCBCD53A8AC021401E023B628463246E5488B0C3F04B9A3503E2E2B180F32303137303232333039353930345AA081A7A481A43081A131819E30090603550406130255533025060355040B1E1E0054005300500020005400650073007400200053006500720076006500723029060355040A1E220050006500630075006C006900610072002000560065006E00740075007200650073303F06035504031E380050006500630075006C006900610072002000560065006E0074007500720065007300200054005300500020005300650072007600650072";
-    const raw = Buffer.from(hex, "hex");
+    // const hex =
+    //   "30820113060B2A864886F70D0109100104A08201020481FF3081FC02010106032901013021300906052B0E03021A0500041495811474539B0D71C20A2107FBACCDCBCD53A8AC021401E023B628463246E5488B0C3F04B9A3503E2E2B180F32303137303232333039353930345AA081A7A481A43081A131819E30090603550406130255533025060355040B1E1E0054005300500020005400650073007400200053006500720076006500723029060355040A1E220050006500630075006C006900610072002000560065006E00740075007200650073303F06035504031E380050006500630075006C006900610072002000560065006E0074007500720065007300200054005300500020005300650072007600650072";
+    // const raw = Buffer.from(hex, "hex");
 
     const contentInfo = AsnConvert.parse(file, TimeStampToken);
-    // assert.strictEqual(contentInfo.contentType, id_ct_tstInfo);
-    // const b = AsnConvert.toString(raw);
-    // console.log(b);
-    // console.log(contentInfo.contentType, contentInfo.content);
-    const a = new OctetString(raw);
-    const b = a.toASN();
-    console.log(b);
-    // const content = AsnConvert.parse(b, OctetString);
-    // const tstInfo = AsnConvert.parse(content, TSTInfo);
+    assert.strictEqual(contentInfo.contentType, id_ct_tstInfo);
+    const content = AsnConvert.parse(contentInfo.content, OctetString);
+    const tstInfo = AsnConvert.parse(content, TSTInfo);
     // console.log(tstInfo);
-    // assert.strictEqual(tstInfo.version, TSTInfoVersion.v1);
-    // assert.strictEqual(tstInfo.policy, "1.1.1.1");
+    assert.strictEqual(tstInfo.version, TSTInfoVersion.v1);
+    assert.strictEqual(tstInfo.policy, "1.1.1.1");
+    assert.strictEqual(
+      tstInfo.messageImprint.hashAlgorithm.algorithm,
+      "1.3.14.3.2.26"
+    );
+    assert.strictEqual(tstInfo.messageImprint.hashAlgorithm.parameters, null);
+    assert.strictEqual(
+      Buffer.from(tstInfo.messageImprint.hashedMessage.buffer).toString("hex"),
+      "95811474539b0d71c20a2107fbaccdcbcd53a8ac"
+    );
     // assert.strictEqual(
-    //   tstInfo.messageImprint.hashAlgorithm.algorithm,
-    //   "1.3.14.3.2.26"
+    //   Buffer.from(tstInfo.serialNumber).toString("hex"),
+    //   "01e023b628463246e5488b0c3f04b9a3503e2e2b"
     // );
-    // assert.strictEqual(tstInfo.messageImprint.hashAlgorithm.parameters, null);
-    // assert.strictEqual(
-    //   Buffer.from(tstInfo.messageImprint.hashedMessage.buffer).toString("hex"),
-    //   "95811474539b0d71c20a2107fbaccdcbcd53a8ac"
-    // );
-    // // assert.strictEqual(
-    // //   Buffer.from(tstInfo.serialNumber).toString("hex"),
-    // //   "01e023b628463246e5488b0c3f04b9a3503e2e2b"
-    // // );
-    // console.log({ genTime: tstInfo.genTime });
-    // // assert(tstInfo.genTime);
-    // assert.strictEqual(tstInfo.ordering, false);
-    // // assert(tstInfo.tsa);
-    // console.log({ tsa: tstInfo.tsa });
+    console.log({ genTime: tstInfo.genTime });
+    // assert(tstInfo.genTime);
+    assert.strictEqual(tstInfo.ordering, false);
+    // assert(tstInfo.tsa);
+    console.log({ tsa: tstInfo.tsa });
   });
 
   // it("create TSP request", () => {
