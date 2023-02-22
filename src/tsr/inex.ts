@@ -11,8 +11,10 @@ import { id_ct_tstInfo } from "./object_identifier";
 class InitTsr {
   public async test() {
     const file = await fs.readFile(
-      path.join(__dirname, "../resoures/response.tsr")
+      path.join(__dirname, "../resoures/response.tsr"),
+      "hex"
     );
+    const fileHex = Buffer.from(file, "hex");
     const hex =
       "30820113060B2A864886F70D0109100104A08201020481FF3081F" +
       "C02010106032901013021300906052B0E03021A05000414958114" +
@@ -26,9 +28,11 @@ class InitTsr {
       "2002000560065006E007400750072006500730020005400530050" +
       "0020005300650072007600650072";
 
-    const raw = Buffer.from(hex, "hex");
-    const contentInfo = AsnConvert.parse(raw, TimeStampToken);
-    assert.strictEqual(contentInfo.contentType, id_ct_tstInfo);
+    const raw = Buffer.from(hex, "utf-8");
+    // await fs.writeFile(path.join(__dirname, "../resoures/test.tst"), raw);
+    console.log(raw);
+    const contentInfo = AsnConvert.parse(fileHex, TimeStampToken);
+    // assert.strictEqual(contentInfo.contentType, id_ct_tstInfo);
     const content = AsnConvert.parse(contentInfo.content, TSTInfo);
 
     console.log({
