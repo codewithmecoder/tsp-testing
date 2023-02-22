@@ -1,0 +1,16 @@
+{
+  "name": "tsr",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.14.0",
+    "ts-node": "^10.9.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "@peculiar/asn1-schema": "^2.3.3",
+    "@peculiar/asn1-x509": "^2.3.4"
+  }
+}
