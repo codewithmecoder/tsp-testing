@@ -27,6 +27,17 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@peculiar/asn1-cms@^2.3.4":
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/@peculiar/asn1-cms/-/asn1-cms-2.3.4.tgz#ab06caa1a56c08f4d8747272bb22299f40946237"
+  integrity sha512-tpPA+/qsrkaEiVhZYebprtLmQCfAeI40A2zrw+TmXCxTUSL59LweremOBlFr5fSp+6rLORdGqu/NM+hHhbJKMg==
+  dependencies:
+    "@peculiar/asn1-schema" "^2.3.3"
+    "@peculiar/asn1-x509" "^2.3.4"
+    "@peculiar/asn1-x509-attr" "^2.3.4"
+    asn1js "^3.0.5"
+    tslib "^2.4.0"
+
 "@peculiar/asn1-schema@^2.3.3":
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/@peculiar/asn1-schema/-/asn1-schema-2.3.3.tgz#21418e1f3819e0b353ceff0c2dad8ccb61acd777"
@@ -34,6 +45,16 @@
   dependencies:
     asn1js "^3.0.5"
     pvtsutils "^1.3.2"
+    tslib "^2.4.0"
+
+"@peculiar/asn1-x509-attr@^2.3.4":
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/@peculiar/asn1-x509-attr/-/asn1-x509-attr-2.3.4.tgz#438a3a3dcd41511526c25a96be77dd2d7938cdd5"
+  integrity sha512-ElOBb2Pw08zSK+fyH+pWlxaLfDZ3ZUM+kx1II0xjMGlmMWXTvlWR74IT5I7H4RnviXAM6BICwQvWacprVxCqcg==
+  dependencies:
+    "@peculiar/asn1-schema" "^2.3.3"
+    "@peculiar/asn1-x509" "^2.3.4"
+    asn1js "^3.0.5"
     tslib "^2.4.0"
 
 "@peculiar/asn1-x509@^2.3.4":
