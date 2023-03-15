@@ -1,4 +1,4 @@
-import { InitTsr } from "./tsr/inex";
+// import { InitTsr } from "./tsr/inex";
 
-const tsr = new InitTsr();
-tsr.test();
+// const tsr = new InitTsr();
+// tsr.test();
