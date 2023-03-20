@@ -14,6 +14,6 @@ context("TSP", () => {
     assert.strictEqual(contentInfo.contentType, id_signedData);
     const tstInfo = AsnConvert.parse(contentInfo.content, TSTInfo);
     console.log(tstInfo);
-    console.log("helo");
+    console.log("ho");
   });
 });
